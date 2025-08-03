@@ -14,4 +14,6 @@ Finally, it calculates the average price of the flour products found.
 
 pip install -r requirements.txt
 
-2. python main.py
+2. Run on the terminal:
+
+python main.py
