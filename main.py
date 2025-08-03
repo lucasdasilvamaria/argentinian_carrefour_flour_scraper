@@ -1,23 +1,23 @@
-from scraper import raspar_precos
+from scraper import scrape_prices
 
-def limpar_preco(preco_str):
-    preco_limpo = preco_str.replace("$", "").replace(" ", "").replace(".", "").replace(",", ".")
+def clean_price(price_str):
+    clean_price = price_str.replace("$", "").replace(" ", "").replace(".", "").replace(",", ".")
     try:
-        return float(preco_limpo)
+        return float(clean_price)
     except:
         return None
 
-def calcular_media(precos_str):
-    precos_float = [limpar_preco(p) for p in precos_str]
-    precos_validos = [p for p in precos_float if p is not None]
-    if not precos_validos:
+def calculate_average(price_strs):
+    float_prices = [clean_price(p) for p in price_strs]
+    valid_prices = [p for p in float_prices if p is not None]
+    if not valid_prices:
         return None
-    return sum(precos_validos) / len(precos_validos)
+    return sum(valid_prices) / len(valid_prices)
 
 if __name__ == "__main__":
-    precos = raspar_precos()
-    media = calcular_media(precos)
-    if media is not None:
-        print(f"Preço médio: ${media:.2f}")
+    prices = scrape_prices()
+    average = calculate_average(prices)
+    if average is not None:
+        print(f"Average price: ${average:.2f}")
     else:
-        print("Nenhum preço válido encontrado.")
+        print("No valid price found.")
